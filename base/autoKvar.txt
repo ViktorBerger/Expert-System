@@ -1,0 +1,36 @@
+PokazivacGoriva* = ima | nema
+RezervoarStanje = prazan | nijePrazan
+AkuStanje = uRedu | slabo
+AkuGodine* = <=2 | 2-4 | >=4
+AkuStarost = nov | srednje | star
+AkuNapon* = >=8 | <8 | nepoznat
+StarterStanje = uRedu | neispravan
+RasplinjacStanje = uRedu | zaliven
+PlatineStanje = uRedu | pokvarene
+MirisGoriva* = da | ne
+ZvukPriPaljenju* = uobicajeni | skripanje | kuckanje | nema
+Svjetla* = uRedu | slaba | nema
+TemperaturaOkoline* = <=-7 | >-7
+MotorOkrece* = da | slabo | ne
+Problem = akuslab | akuPrehladno | rasplinjacZaliven | platinePokvarene | starterNeispravan | rezervoarPrazan
+-----
+IF PokazivacGoriva = ima THEN RezervoarStanje = nijePrazan
+IF PokazivacGoriva = nema THEN RezervoarStanje = prazan
+IF AkuGodine = <=2 THEN AkuStarost = nov
+IF AkuGodine = 2-4 THEN AkuStarost = srednje
+IF AkuGodine = >=4 THEN AkuStarost = star
+IF AkuNapon = >=8 THEN AkuStanje = uRedu
+IF AkuNapon = <8 THEN AkuStanje = slabo
+IF TemperaturaOkoline = <=-7 & AkuStanje = uRedu THEN Problem = akuPrehladno
+IF MotorOkrece = slabo|ne & Svjetla = slaba & AkuNapon = nepoznat THEN AkuStanje = slabo
+IF MotorOkrece = ne & Svjetla = ne & AkuNapon = nepoznat THEN AkuStanje = slabo
+IF MotorOkrece = slabo|ne & Svjetla = uRedu & AkuNapon = nepoznat & AkuStarost = nov|srednje THEN AkuStanje = slabo
+IF MotorOkrece = da & AkuStanje = uRedu & MirisGoriva = da THEN RasplinjacStanje = zaliven
+IF MotorOkrece = ne & ZvukPriPaljenju = kuckanje THEN PlatineStanje = pokvarene
+IF MotorOkrece = ne & ZvukPriPaljenju = nema & AkuStanje = uRedu THEN PlatineStanje = pokvarene
+IF ZvukPriPaljenju = skripanje THEN StarterStanje = neispravan
+IF RezervoarStanje = prazan THEN Problem = rezervoarPrazan
+IF AkuStanje = slabo THEN Problem = akuslab
+IF RasplinjacStanje = zaliven THEN Problem = rasplinjacZaliven
+IF PlatineStanje = pokvarene THEN Problem = platinePokvarene
+IF StarterStanje = neispravan THEN Problem = neispravanStarter

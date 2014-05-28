@@ -1,0 +1,21 @@
+Punoljetnost = da | ne
+Dob* = <21 | >=21
+RadnaSposobnost* = da | ne
+MjesecnaPrimanja* = <1000 | 1000-3000 | >3000
+ImovinskiStatus = nizak | srednji | visok
+LisenRoditeljskeSkrbi* = da | ne
+Drzavljanstvo* = hrvatsko | strano
+RazlikaUGodinama* = <18 | 18-45 | >45
+Srodstvo = da | ne
+PravoPosvojenja = da | ne
+----------------------------------------------------
+# napomena: punoljetnost po američkim zakonima :)
+IF Dob = >=21 THEN Punoljetnost = da
+IF Dob = <21 THEN Punoljetnost = ne
+IF RadnaSposobnost = da & MjesecnaPrimanja = <1000 THEN ImovinskiStatus = nizak
+IF RadnaSposobnost = da & MjesecnaPrimanja = 1000-3000 THEN ImovinskiStatus = srednji
+IF RadnaSposobnost = da & MjesecnaPrimanja = >3000 THEN ImovinskiStatus = visok
+IF LisenRoditeljskeSkrbi = da THEN PravoPosvojenja = ne
+IF Srodstvo = da THEN PravoPosvojenja = ne
+IF Punoljetnost = da & RazlikaUGodinama = <18|>45 THEN PravoPosvojenja = ne
+IF Punoljetnost = da & RazlikaUGodinama = 18-45 & ImovinskiStatus = srednji|visok THEN PravoPosvojenja = da

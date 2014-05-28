@@ -1,0 +1,37 @@
+ToplaKrv* = ima | nema
+Perje* = ima | nema
+LijezeJaja* = da | ne
+JedeMeso* = da | ne
+OstriZubi* = ima | nema
+Kandze* = da | ne
+Kopita* = ima | nema
+Tockasta* = da | ne
+Prugasta* = da | ne
+Velicina* = mala | srednja | velika
+Udomacena* = da | ne
+VoliSeMaziti* = da | ne
+DugacakVrat* = da | ne
+Leti* = da | ne
+Pliva* = da | ne
+ImaRogove* = da | ne
+IsprepletenaStopala* = da | ne
+RodZivotinje* = ptica | sisavac
+VrstaZivotinje* = macka | kopitar
+Prehrana* = mesojed | biljojed
+Zivotinja* = leopard | tigar | kucna_macka | zirafa | noj | zebra | bik | pingvin | albatros | patka
+-----
+IF ToplaKrv = ima THEN RodZivotinje = sisavac
+IF Perje = ima & LijezeJaja = da THEN RodZivotinje = ptica
+IF RodZivotinje = sisavac & JedeMeso = da THEN Prehrana = mesojed
+IF Prehrana = mesojed & OstriZubi = ima & Kandze = da THEN VrstaZivotinje = macka
+IF Prehrana = mesojed & RodZivotinje = sisavac & Kopita = ima THEN VrstaZivotinje = kopitar
+IF VrstaZivotinje = macka & Tockasta = da & Velicina = velika THEN Zivotinja = leopard
+IF VrstaZivotinje = macka & Prugasta = da & Velicina = velika THEN Zivotinja = tigar
+IF VrstaZivotinje = macka & Velicina = mala & Udomacena = da & VoliSeMaziti = da THEN Zivotinja = kucna_macka
+IF VrstaZivotinje = kopitar & Prugasta = da THEN Zivotinja = zebra
+IF VrstaZivotinje = kopitar & Tockasta = da & DugacakVrat = da THEN Zivotinja = zirafa
+IF VrstaZivotinje = kopitar & ImaRogove = da THEN Zivotinja = bik
+IF RodZivotinje = ptica & Pliva = ne & Leti = ne THEN Zivotinja = noj
+IF RodZivotinje = ptica & Pliva = da & Leti = ne THEN Zivotinja = pingvin
+IF RodZivotinje = ptica & Leti = da & IsprepletenaStopala = da THEN Zivotinja = albatros
+IF RodZivotinje = ptica & Leti = da & IsprepletenaStopala = da THEN Zivotinja = patka
